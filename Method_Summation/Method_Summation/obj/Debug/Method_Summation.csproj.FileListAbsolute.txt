@@ -1,0 +1,7 @@
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\bin\Debug\Method_Summation.exe.config
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\bin\Debug\Method_Summation.exe
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\bin\Debug\Method_Summation.pdb
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\obj\Debug\Method_Summation.csproj.AssemblyReference.cache
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\obj\Debug\Method_Summation.csproj.CoreCompileInputs.cache
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\obj\Debug\Method_Summation.exe
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\Method_Summation\Method_Summation\obj\Debug\Method_Summation.pdb
