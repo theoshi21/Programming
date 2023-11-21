@@ -1,0 +1,7 @@
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\bin\Debug\DeathlandSaga.exe.config
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\bin\Debug\DeathlandSaga.exe
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\bin\Debug\DeathlandSaga.pdb
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\obj\Debug\DeathlandSaga.csproj.AssemblyReference.cache
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\obj\Debug\DeathlandSaga.csproj.CoreCompileInputs.cache
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\obj\Debug\DeathlandSaga.exe
+C:\Users\Kelvin\OneDrive\Desktop\College\Practices\Programming\DeathlandSaga\DeathlandSaga\obj\Debug\DeathlandSaga.pdb
