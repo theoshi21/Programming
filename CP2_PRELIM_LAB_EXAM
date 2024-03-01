@@ -1,0 +1,243 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrelimLabExam
+{
+    class Program
+    {
+
+        static double totalSales = 0;
+        static int[] stockLeft = { 30, 50, 50, 50, 80, 25, 100, 65, 50 };
+        static string[] stockItem = { "Shampoo", "Bar of Soap", "Instant Noodles", "Chips", "Crackers", "Soda", "Bottled Water", "Sandwhich Spread", "Soup Sachet" };
+        static int[] stockPrice = { 20, 25, 15, 8, 5, 75, 25, 40, 25 };
+        static int[] stockNum = { 30, 50, 50, 50, 80, 25, 100, 65, 50 };
+        static int[] totalSale = new int[9];
+    
+        static void Main(string[] args)
+        {
+
+            while (true)
+            {
+                Console.WriteLine("Welcome to Sari-Sari Store ala Prelim Lab Exam");
+                Console.Write("Account: ");
+                string acc = Console.ReadLine();
+
+                Console.Clear();
+                if (acc == "admin" || acc == "administrator")
+                {
+                    Administrator();
+                }
+                else if (acc == "guest" || acc == "customer")
+                {
+                    Customer();
+                }
+            }
+         
+        }
+
+
+        //method for updating stocks
+
+        static void Administrator()
+        {
+            bool run = true;
+            while (run)
+            {
+                Console.WriteLine("Welcome, Administrator! What would you like to do?");
+                Console.WriteLine("[1] List of current stock");
+                Console.WriteLine("[2] Total sale for each stock");
+                Console.WriteLine("[3] Overall total sale");
+                Console.Write("ACTION: ");
+                string ans = Console.ReadLine();
+
+                Console.Clear();
+                switch (ans)
+                {
+                    case "1":
+                        Console.WriteLine("LIST OF CURRENT STOCK");
+                        Console.WriteLine("-----------------------");
+                        for (int i = 0; i < 9; i++)
+                        {
+                            Console.WriteLine($"{stockLeft[i]}/{stockNum[i]} pcs of {stockItem[i]}");
+                        }
+                        Console.WriteLine("\nPress any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+
+                    case "2":
+                        Console.WriteLine("TOTAL SALE FOR EACH STOCK");
+                        Console.WriteLine("-----------------------");
+                        Console.WriteLine(String.Format("{0,-20} {1,-10}", "Item", "Sales"));
+                        
+                        for(int i = 0; i < 9; i++)
+                        {
+                            Console.WriteLine(String.Format("{0,-20} {1,-10}", stockItem[i], $"P{totalSale[i]}"));
+                        }
+                        Console.WriteLine("\nPress any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                      
+                    case "3":
+                        Console.WriteLine("OVERALL TOTAL SALE");
+                        Console.WriteLine("-----------------------");
+                        Console.WriteLine($"You have made a total of P{totalSales}");
+                        Console.WriteLine("\nPress any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+
+                }
+
+                while (true)
+                {
+                    Console.Write("\nWould you like to logout? [Y/N]: ");
+                    string log = Console.ReadLine().ToLower();
+
+                    if (log == "y")
+                    {
+                        Console.Clear();
+                        run = false;
+                        break;
+                    }
+                    else if (log == "n")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else Console.WriteLine("Invalid input, try again.");
+                }
+
+            }
+
+        }
+
+        static void Customer()
+        {
+            int total = 0;
+            string[,] cart = new string[10, 3];
+            int[] tempStock = stockLeft.ToArray();
+            int cartIndex = 0;
+
+            bool ordering = true;
+            while (ordering && cartIndex < 10)
+            {
+                displayitems(stockItem, stockPrice, stockNum, tempStock);
+                Console.WriteLine("Please type the number of your order's number.");
+                Console.Write($"ORDER #{cartIndex + 1}: ");
+                int orderNum = int.Parse(Console.ReadLine()) - 1;
+
+                tempStock[orderNum] -= 1;
+                cart[cartIndex, 0] = stockItem[orderNum];
+                cart[cartIndex, 1] += 1;
+                cart[cartIndex, 2] = stockPrice[orderNum].ToString();
+                cartIndex++;
+
+                Console.WriteLine("Added to cart!");
+                Console.Write("\nType 'n' to else any character to continue: ");
+                string cont = Console.ReadLine().ToLower();
+                if (cont == "n")
+                {
+                    ordering = false;
+                }
+                Console.Clear();
+            }
+
+            for (int i = 0; i <= cartIndex - 1; i++)
+            {
+                total += int.Parse(cart[i, 1]) * int.Parse(cart[i, 2]);
+            }
+
+            double totalVat = total + (total * .20);
+            
+
+            while (true)
+            {
+                Console.Write("Would you like to view all your products? [Y/N]: ");
+                string view = Console.ReadLine().ToLower();
+
+                if (view == "y" || view == "yes")
+                {
+                    Console.Clear();
+                    displayCart(cart, cartIndex);
+                    Console.WriteLine($"\nTotal: P{total}");
+                    Console.WriteLine($"\nPlease do note that there will be a 20% added VAT when you checkout.");
+                    Console.ReadKey(true);
+                    break;
+                }
+                else if (view == "n" || view == "no")
+                {
+                    Console.Clear();
+                    break;
+                }
+                else Console.WriteLine("Invalid action, try again.");
+            }
+
+            while (true)
+            {
+                Console.Write("Would you like to checkout or cancel? [Checkout / Cancel]: ");
+                string end = Console.ReadLine().ToLower();
+
+                if (end == "checkout")
+                {
+                    Console.Clear();
+                    stockLeft = tempStock;
+                    for(int i = 0; i < cartIndex; i++)
+                    {
+                        for (int j = 0; j < 9; j++)
+                        {
+                            if (cart[i, 0] == stockItem[j])
+                            {
+                                totalSale[j] += stockPrice[j];
+                            }
+                        }
+                    }    
+                    totalSales += total;
+                    Console.WriteLine("Thank you for buying! Here is your receipt.");
+                    displayCart(cart, cartIndex);
+                    Console.WriteLine($"\nTotal: P{total}");
+                    Console.WriteLine($"Total w/ 20% VAT: P{totalVat}");
+                    Console.ReadKey(true);
+                    Console.WriteLine("\nPress any key and you will proceed to login screen.");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                    break;
+                }
+                else if (end == "cancel")
+                {
+                    Console.Clear();
+                    break;
+                }
+                else Console.WriteLine("Invalid action, try again.");
+
+            }
+        }
+
+        static void displayCart (string[,] cart, int cartIndex)
+        {
+            Console.WriteLine("ORDERS");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine(String.Format("{3, -5} {0,-20} {1,-10} {2,-10}", "Item", "Quantity", "Price", "#"));
+            for (int i = 0; i < cartIndex; i++)
+            {
+                 Console.WriteLine(String.Format("{3, -5} {0,-20} {1,-10} {2,-10}", $"{cart[i, 0]}", $"{cart[i, 1]}", $"{cart[i, 2]}", i + 1));
+
+            }
+        }
+
+
+        static void displayitems(string[] stockItem, int[] stockPrice, int[] stockNum, int[] stockLeft)
+        {
+            Console.WriteLine("PRODUCTS");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine(String.Format("{3, -5} {0,-20} {1,-10} {2,-10}", "Item", "Price", "Stock","#"));
+
+            for (int i = 0; i < 9; i++)
+            {
+                Console.WriteLine(String.Format("{3,-5} {0,-20} {1,-10} {2,-10}", stockItem[i], $"P{stockPrice[i]}",$"{stockLeft[i]}/{stockNum[i]}",i+1));
+            }
+
+        }
+    }
+}
